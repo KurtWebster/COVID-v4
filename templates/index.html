@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>COVID Data</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename= 'images/favicon-32x32.png') }}">
+    </head>
+    <body>
+
+
+
+      <div class="">
+        {{ world_div|safe }}
+        {{ world_script|safe }}
+      </div>
+
+      <div class="container-1">
+
+        <div class="item-1-1">
+          {{ map_div|safe }}
+          {{ map_script|safe }}
+        </div>
+
+        <div class="item-1-2">
+          <table>
+            <tr>
+              <th>REGION</th>
+              <th>CASES</th>
+              <th>CASES % POP</th>
+            </tr>
+            {% for index, data in region_covid_df.iterrows() : %}
+              <tr>
+                <td>{{ data['REGION']|safe }}</td>
+                <td>{{ data['CASES']|safe }}</td>
+                <td>{{ data['CASES % POP']|safe }}%</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+
+        <div class="item-1-3">
+          {{ div|safe }}
+          {{ script|safe }}
+        </div>
+
+      </div>
+
+      <div class="container-2">
+
+        <div class="item-2-1">
+          <h3><u>Tools</u></h3>
+          <br>
+          <p>
+            <img src="{{ url_for('static', filename= 'images/pan.png') }}" alt="pan">
+            <span>Pan across the chart using the mouse.</span>
+          </p>
+          <p>
+            <img src="{{ url_for('static', filename= 'images/box_zoom.png') }}" alt="box_zoom">
+            <span>Zoom into a selected area.</span>
+          </p>
+          <p>
+            <img src="{{ url_for('static', filename= 'images/wheel_zoom.png') }}" alt="wheel_zoom">
+            <span>Zoom using the mouse wheel.</span>
+          </p>
+          <p>
+            <img src="{{ url_for('static', filename= 'images/save.png') }}" alt="save">
+            <span>Save the chart as an image.</span>
+          </p>
+          <p>
+            <img src="{{ url_for('static', filename= 'images/hover.png') }}" alt="hover">
+            <span>Toggle annotations</span>
+          </p>
+          <p>
+            <img src="{{ url_for('static', filename= 'images/reset.png') }}" alt="reset">
+            <span>Reset chart</span>
+          </p>
+        </div>
+
+        <div class="item-2-2">
+          <h3><u>Maps</u></h3>
+          <br>
+          <ul>
+            <li>
+              <b>World Map: </b>Depending on selection, the size of each red circle indicates
+              the proportion of COVID tests returning as positive or the number of COVID
+              related deaths per million people.
+            </li>
+            <br>
+            <li>
+              <b>UK Map: </b>The size of each red circle indicates the number of
+              COVID cases as a proportion of the population for each county.
+              <br><i>Scotland, Wales & N. Ireland may have large circles on
+              certain days. This is often due to no reporting on previous days.</i>
+            </li>
+            <br>
+            <li>
+              <b>Sliders: </b>Scroll through historical COVID cases on both maps.
+            </li>
+          </ul>
+          <br>
+          <br>
+          <h3><u>Table</u></h3>
+          <br>
+          <ul>
+            <li>
+              <b>Table: </b>Shows the total number of COVID cases and the cases as a Percentage
+              for each UK region.
+            </li>
+          </ul>
+        </div>
+
+        <div class="item-2-3">
+          <h3><u>Charts</u></h3>
+            <br>
+            <li>
+              <b>Total Cases: </b>Total number of UK COVID cases by day.
+            </li>
+            <br>
+            <li>
+              <b>Total Tests: </b>Total number of UK COVID tests by day.
+            </li>
+            <br>
+            <li>
+              <b>% Positive: </b>Proportion of COVID tests with a positive
+              result by day.
+            </li>
+            <br>
+            <li>
+              <b>Hospital Admissions: </b>Total number of UK hospital admissions
+              by day.
+            </li>
+            <br>
+            <li>
+              <b>Hospital Beds: </b>Total number of UK hospital beds occupied by
+              COVID patients.
+            </li>
+            <br>
+            <li>
+              <b>MV Beds: </b>Total number of mechanically ventilated beds
+              occupied by COVID patients in hospital.
+            </li>
+          </ul>
+          <br>
+        </div>
+
+      </div>
+
+    </body>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.0.min.js"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.0.min.js"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.0.min.js"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.0.min.js"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.0.min.js"
+                crossorigin="anonymous"></script>
+</html>
